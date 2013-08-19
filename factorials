@@ -1,0 +1,42 @@
+var lg10 = Math.log(10);
+
+function log10(x)
+{
+return Math.log(x)/lg10;
+}
+
+function findNums(){
+
+// factorials 0-9 array
+var factorials = [];
+factorials[0] = 1;
+
+for (var i = 1; i<=9; i++)
+{
+factorials[i] = factorials[i-1] * i;
+}
+
+// result array
+var nums = [];
+var n = 1;
+
+while( Math.floor( Number( log10(n) + 1)) <= Math.floor( log10( factorials[9] * (log10(n) +1 )) ) )
+{
+var cNum = n.toString().split('');
+var len = cNum.length;
+var factorialSum = 0;
+
+for(var j = 0; j< len; j++)
+{
+factorialSum += factorials[Number(cNum[j])];
+}
+
+if(factorialSum == n) nums.push(n);
+
+n++;
+}
+
+return nums.toString();
+}
+ 
+console.log( findNums() );
